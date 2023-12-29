@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="icon" href="gameicon.jpg">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="2xgamepehligamehai practiceswork.com">
+<meta name="keywords" content="2xgamepehligamehai,practiceswork.com">
+<meta name="author" content="ali">
+        <style>
+            body{
+                background-color: black;
+            }
+.box{
+    position: relative;
+  margin: 20px;
+   box-shadow: 10px 10px 10px  gray;
+   width: 700px;
+    height: 500px;
+    background-color: black;
+    box-sizing: border-box;
+}
+.boxcol{
+    width: 138px;
+    background-color: rgb(41, 39, 39);
+    height: 499px;
+    float: left;
+    border: 1px solid black;
+}
+.boxele{
+    width: 700px;
+    height: 150px;
+   background-color: rgb(41, 39, 39);
+    position: absolute;
+    bottom: -150px;
+    box-shadow: 10px 10px 10px  darkgray;
+    border: 1px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+}
+@media only screen and (max-width: 600px) {
+ .box{
+    margin: 10px;
+    width: 330px;
+    height: 500px;
+    box-sizing: border-box;
+ }
+ .boxcol{
+    width: 64px;
+    height: 500px;
+}
+.boxele{
+    width: 329px;
+    height: 100px;
+   border: 1px solid black;
+    position: absolute;
+    bottom: -101px;
+}
+.li{
+    width: 62px;
+    box-sizing: border-box;
+}
+}
+@media only screen and (max-width: 370px) {
+ .box{
+    margin: 0px;
+    width: 300px;
+    height: 400px;
+    box-sizing: border-box;
+ }
+ .boxcol{
+    width: 58px;
+    height: 400px;
+}
+.boxele{
+    width: 299px;
+    height: 80px;
+   border: 1px solid black;
+    position: absolute;
+    bottom: -80px;
+}
+.li{
+    width: 58px;
+    box-sizing: border-box;
+}
+
+}
+#randomnum{
+   width: 200px;
+   height: 80px;
+   border-radius: 20px;
+   background-color: black;
+   cursor: pointer;
+color: white;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 100px;
+}
+li{
+    height: 138px;
+    text-decoration: none;
+    width: 137px;
+    height: 60px;
+    background-color: black;
+    border-radius: 20px;
+    list-style-type: none;
+    position: relative;
+    top: -15px;
+    left: -40px;
+    border: 1px solid white;
+    float: left;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2em;
+    box-sizing: border-box;
+}
+        </style>
+    </head>
+    <body>
+<div class="box"><div class="boxele"><div id="randomnum">2</div></div>
+<div class="boxcol" onclick="run(0)"><ul id="b0"></ul></div>
+<div class="boxcol" onclick="run(1)"><ul id="b1"></ul></div>
+<div class="boxcol" onclick="run(2)"><ul id="b2"></ul></div>
+<div class="boxcol" onclick="run(3)"><ul id="b3"></ul></div>
+<div class="boxcol" onclick="run(4)"><ul id="b4"></ul></div>
+</div>
+<audio id="aud">
+    <source src="audio.ogg" type="audio/ogg">
+  <source src="audio.mp3" type="audio/mpeg">
+</audio>
+<audio id="aud1">
+    <source src="audio1.ogg" type="audio/ogg">
+  <source src="audio1.mp3" type="audio/mpeg">
+</audio>
+        <script>
+    var max=6;
+    var min=2;
+            function ra(ma,mi) {
+                var rn=Math.floor(Math.random()*(ma-mi))+1;
+               var number=2**rn;
+            document.getElementById("randomnum").innerHTML=number;}
+function clk(tar) {
+    if(tar==0){
+       run();
+    }
+   else if(tar==1){
+       run()
+    }
+    else  if(tar==2){
+       run();
+    }
+    else  if(tar==3){
+       run()
+    }
+    else  if(tar==4){
+    run();
+    }}
+function run(id) {
+    var aud=document.getElementById("aud");
+    var aud1=document.getElementById("aud1");
+    aud.play();
+    var cid="b"+id;
+    var ul=document.getElementById(cid);
+       var count= ul.childElementCount;
+       if(count<8||Number(ul.lastElementChild.innerHTML)==Number(document.getElementById("randomnum").innerHTML)){
+           addnode(ul);  
+           lastchk(ul);
+           prevs(ul);
+           nexts(ul);
+           ra(max,min);
+       }
+       else{
+        alert("No Space Left");
+       }
+}
+function random_bg_color() {
+    var x = Math.floor(Math.random() * 90);
+    var y = Math.floor(Math.random() * 90);
+    var z = Math.floor(Math.random() * 90);
+    var bgColor = "rgb(" + x + "," + y + "," + z + ")";
+return bgColor;
+    }
+//Add new node 
+function addnode(ul) {
+         var li=document.createElement("li");
+         li.className="li";
+         li.style.backgroundColor= random_bg_color();
+        ul.appendChild(li);
+        var get=  parseInt(document.getElementById("randomnum").innerHTML);
+   var val=document.createTextNode(get);
+      li.appendChild(val);
+       move();
+     function move() {
+         var pos=430;
+         var anim=setInterval(animate,1);
+         function animate() {
+             if(pos!=-10){
+             pos-=5;
+             li.style.top=pos+"px";}
+         }
+     }
+       }
+    //chk with last node
+    function lastchk(ul) {
+           var count=ul.childElementCount;
+           for (let i = 0; i < count; i++) {
+                    if (ul.lastElementChild.previousElementSibling) {
+                    if(ul.lastElementChild.innerHTML===ul.lastElementChild.previousElementSibling.innerHTML){
+                    aud1.play();
+                    var last=Number(ul.lastElementChild.innerHTML);
+                    var pl=Number(ul.lastElementChild.previousElementSibling.innerHTML);
+                    var t=last+pl;
+                    ul.lastElementChild.previousElementSibling.innerHTML=t;
+                    ul.lastElementChild.previousElementSibling.style.backgroundColor=random_bg_color(); 
+                    ul.removeChild(ul.lastElementChild);
+                }     
+                    } 
+                 }
+     }
+    //Check with prev sibling
+    function prevs(ul) {
+        var count=ul.childElementCount;
+        for (let i = 0; i < count; i++) {
+            if (ul.parentElement.previousElementSibling.firstChild.childNodes[i]) {
+                  if (Number(ul.parentElement.previousElementSibling.firstChild.childNodes[i].innerHTML)==Number(ul.childNodes[i].innerHTML)) {
+                    aud1.play();    
+                       var prevsib=ul.parentElement.previousElementSibling.firstChild;
+                          var oc=Number(ul.parentElement.previousElementSibling.firstChild.childNodes[i].innerHTML);
+                          var tc=Number(ul.childNodes[i].innerHTML);
+                         var  t=Number(oc)+Number(tc);
+                          ul.childNodes[i].innerHTML=t; 
+                        prevsib.removeChild(prevsib.childNodes[i]);
+                         }   
+                }
+            }
+    }
+    // next sib check
+    function nexts(ul) {
+        var count=ul.childElementCount;
+        for (let i = 0; i < count; i++) {
+            if (ul.parentElement.nextElementSibling) { 
+            if (ul.parentElement.nextElementSibling.firstChild.childNodes[i]) { 
+            if (Number(ul.childNodes[i].innerHTML)==Number(ul.parentElement.nextElementSibling.firstChild.childNodes[i].innerHTML)) {
+                aud1.play();
+                  var nextsib=ul.parentElement.nextElementSibling.firstChild;
+                     var oc=Number(ul.parentElement.nextElementSibling.firstChild.childNodes[i].innerHTML);
+                     var tc=Number(ul.childNodes[i].innerHTML);
+                    var  t=Number(oc)+Number(tc);
+                    ul.childNodes[i].style.backgroundColor=random_bg_color(); 
+                     ul.childNodes[i].innerHTML=t;
+                   nextsib.removeChild(nextsib.childNodes[i]);
+                    }   
+             }   }  
+    }}
+        </script>
+    </body>
+</html>
